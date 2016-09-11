@@ -10,49 +10,66 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.aca.andrewott.comicbooks.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/title"
-        android:editable="true"
-        android:layout_above="@+id/price"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/issueNumber"
-        android:editable="true"
+        android:id="@+id/basePriceInput"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
+        android:hint="Base Price:"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/conditionInput"
+        android:hint="Condition:"
+        android:layout_above="@+id/issueNumberInput"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/issueNumberInput"
+        android:hint="Issue Number:"
+        android:layout_above="@+id/titleInput"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/titleInput"
+        android:hint="Title:"
+        android:layout_above="@+id/basePriceInput"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/condition"
-        android:editable="true"
-        android:layout_alignBaseline="@+id/price"
-        android:layout_alignBottom="@+id/price"
+        android:text="Give me your COMIX"
+        android:id="@+id/textView"
+        android:textSize="36sp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/price"
-        android:editable="true"
-        android:layout_marginTop="164dp"
-        android:layout_below="@+id/issueNumber"
+        android:text="New Button"
+        android:id="@+id/addButton"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/outputText"
+        android:layout_above="@+id/addButton"
+        android:layout_centerHorizontal="true"
+        android:textSize="32dp"/>
 </RelativeLayout>
