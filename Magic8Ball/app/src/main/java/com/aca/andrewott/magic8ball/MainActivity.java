@@ -105,20 +105,25 @@ public class MainActivity extends AppCompatActivity {
                 int index = new Random().nextInt(primaryList.length);
                 mTxtPrimary.setText(primaryList[index]);
             }});
+
         // onclick for secondary. replace "sweatyList" with secondary string
         mBtnShowSecondary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
-                int index = new Random().nextInt(secondaryList.length);
-                mTxtSecondary.setText(secondaryList[index]);
+                int index2 = new Random().nextInt(secondaryList.length);
+                mTxtSecondary.setText(secondaryList[index2]);
             }});
+
         // onclick for heavy
         mBtnShowHeavy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
-                int index = new Random().nextInt(heavyList.length);
-                mTxtHeavy.setText(heavyList[index]);
+                int index3 = new Random().nextInt(heavyList.length);
+                mTxtHeavy.setText(heavyList[index3]);
+
             }});
+
+
         // onclick for perks and buffs
         mButtonDiceRoll.setOnClickListener(new View.OnClickListener() {
             @Override
