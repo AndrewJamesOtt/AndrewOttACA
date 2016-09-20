@@ -1,0 +1,9 @@
+<resources>
+    <string name="textViewOutput">Your fate awaits</string>
+    <string name="app_name">Magic8Ball</string>
+    <string name="action_settings">Settings</string>
+    <string name="buttonShowFate">Find Your Fate</string>
+    <string name="primary_weapon">Your Primary sweatiness this week...</string>
+    <string name="secondary_weapon">...Sweaty Secondaries though...</string>
+    <string name="heavy_weapon">...Heavy. The most important meal of the day!</string>
+</resources>

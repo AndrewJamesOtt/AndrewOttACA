@@ -1,13 +1,18 @@
 package com.aca.andrewott.notetoself;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -19,7 +24,21 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    // animation member variables
+    Animation mAnimFlash;
+    Animation mFadeIn;
+
     private NoteAdapter mNoteAdapter;
+    private boolean mSound;
+    private int mAnimOption;
+    private SharedPreferences mPrefs;
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+        mNoteAdapter.saveNotes();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this,SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -88,7 +109,31 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public class NoteAdapter extends BaseAdapter {
+
+        // call to save our users data
+        public void saveNotes(){
+            try{
+                mSerializer.save(noteList);
+            }catch(Exception e){
+                Log.e("Error Saving Notes","", e);
+            }
+        }
+        private JSONSerializer mSerializer;
         List<Note> noteList = new ArrayList<Note>();
+        public NoteAdapter(){
+
+            mSerializer = new JSONSerializer("NoteToSelf.json",
+                    MainActivity.this.getApplicationContext());
+
+            try {
+                noteList = mSerializer.load();
+            } catch (Exception e) {
+                noteList = new ArrayList<>();
+                Log.e("Error loading notes: ", "", e);
+            }
+
+        }
+
 
         @Override
         public int getCount() {
@@ -127,6 +172,19 @@ public class MainActivity extends AppCompatActivity {
             // hides any ImageView widgets that are not relevant
             Note tempNote = noteList.get(whichItem);
 
+            /*
+            Now, we just need to apply the appropriate animation to the appropriate part of our UI.
+            We can do so in the NoteAdapter inner class in the getView method, just after we
+            initialize tempNote with the details of the note we are currently dealing with.
+            We are then in a position to call isImportant to make a decision about which animation
+            to play.
+             */
+            if (tempNote.isImportant() && mAnimOption != SettingsActivity.NONE) {
+                view.setAnimation(mAnimFlash);
+            }else{
+                view.setAnimation(mFadeIn);
+            }
+
             if(!tempNote.isImportant()){
                 ivImportant.setVisibility(View.GONE);
             }
@@ -148,5 +206,80 @@ public class MainActivity extends AppCompatActivity {
             notifyDataSetChanged();
         }
     }
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        mPrefs = getSharedPreferences("Note to self", MODE_PRIVATE);
+        mSound = mPrefs.getBoolean("sound", true);
+        mAnimOption = mPrefs.getInt("anim option", SettingsActivity.FAST);
+
+        /*
+        Now, let's initialize these animations based on the user's current settings.
+        The best place to do this is in onResume because that is where we load the
+        settings, and it is guaranteed to run every time MainActivity is run, whether
+        that is because the app has just started or because the user is just returning from
+        the settings screen (perhaps having just changed the settings).
+         */
+        mAnimFlash = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.flash);
+        mFadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
+
+        // Set the rate of flash based on settings
+        if(mAnimOption == SettingsActivity.FAST){
+
+            mAnimFlash.setDuration(100);
+            Log.i("anim = ",""+ mAnimOption);
+        }else if(mAnimOption == SettingsActivity.SLOW){
+
+            Log.i("anim = ",""+ mAnimOption);
+            mAnimFlash.setDuration(1000);
+        }
+
+        mNoteAdapter.notifyDataSetChanged();
+    }
 
 }
+/*
+We know how to animate widgets now, but what about shapes or images that I create myself?
+ImageView can hold any image you like. Just add the image to the drawable folder and then
+set the appropriate src property on the ImageView. You can then animate whatever image is
+being shown in the ImageView widget.
+
+What if I want more flexibility than this, more like a drawing app or even a game?
+To implement this kind of functionality, you will need to learn another general
+computing concept (threads) as well as some more Android classes (such as Paint, Canvas,
+and SurfaceView). You will learn how to draw anything from a single pixel to shapes,
+and then how to move them around the screen in a later lesson.
+*/
+
+/*
+SUMMARY:
+Now, we have another app-enhancing trick up our sleeves, and we have seen that animations
+in Android are quite straightforward. We design an animation in XML and add the file to
+the anim folder. Next, we get a reference to the animation in XML with an Animation object
+in our Java code.
+
+We can then use a reference to a widget in our UI and set an animation to it using
+setAnimation and passing in the Animation object. We actually commence the animation by
+calling startAnimation on the reference to the widget.
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
