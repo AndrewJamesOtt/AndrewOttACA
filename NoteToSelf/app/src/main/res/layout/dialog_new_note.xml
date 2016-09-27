@@ -46,4 +46,10 @@
         android:text="@string/ok_button"
         android:id="@+id/btnOK"
         android:layout_alignTop="@+id/btnCancel" android:layout_alignParentEnd="true"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/photo_button"
+        android:id="@+id/btnPhoto" android:layout_alignTop="@+id/btnOK"
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>
