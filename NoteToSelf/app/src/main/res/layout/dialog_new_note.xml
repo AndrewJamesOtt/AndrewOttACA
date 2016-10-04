@@ -52,4 +52,9 @@
         android:text="@string/photo_button"
         android:id="@+id/btnPhoto" android:layout_alignTop="@+id/btnOK"
         android:layout_centerHorizontal="true"/>
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/imageViewPhoto"
+        android:layout_alignTop="@+id/checkBoxIdea" android:layout_alignEnd="@+id/btnOK"/>
 </RelativeLayout>

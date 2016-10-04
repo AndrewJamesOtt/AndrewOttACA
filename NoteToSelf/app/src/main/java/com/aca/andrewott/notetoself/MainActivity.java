@@ -3,6 +3,7 @@ package com.aca.andrewott.notetoself;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,22 +30,30 @@ public class MainActivity extends AppCompatActivity {
     Animation mAnimFlash;
     Animation mFadeIn;
 
+    Note mTempNote = new Note();
+
     private NoteAdapter mNoteAdapter;
     private boolean mSound;
     private int mAnimOption;
     private SharedPreferences mPrefs;
-
-    @Override
-    protected void onPause(){
-        super.onPause();
-
-        mNoteAdapter.saveNotes();
-    }
+    private static final int CAMERA_REQUEST = 123;
+    private ImageView imageViewPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        imageViewPhoto = (ImageView)this.findViewById(R.id.imageViewPhoto);
+        Button photoButton = (Button) this.findViewById(R.id.btnPhoto);
+        photoButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+        });
 
         mNoteAdapter = new NoteAdapter();
         ListView listNote = (ListView) findViewById(R.id.listView);
@@ -73,8 +83,26 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
+
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            imageViewPhoto.setImageBitmap(photo);
+        }
+    }
+
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+        mNoteAdapter.saveNotes();
+    }
+
     public void createNewNote(Note n) {
-        mNoteAdapter.addNote(n);
+        //temp code
+        mTempNote = n;
     }
 
 

@@ -14,9 +14,12 @@ import android.widget.TextView;
  * Created by andrewott on 9/15/16.
  */
 public class DialogShowNote extends DialogFragment {
+
     private Note mNote;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         // All the other code goes here!
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -30,8 +33,10 @@ public class DialogShowNote extends DialogFragment {
         txtDescription.setText(mNote.getDescription());
 
         ImageView ivImportant = (ImageView) dialogView.findViewById(R.id.imageViewImportant);
+
         ImageView ivTodo = (ImageView) dialogView.findViewById(R.id.imageViewTodo);
         ImageView ivIdea = (ImageView) dialogView.findViewById(R.id.imageViewIdea);
+
 
         if (!mNote.isImportant()) {
             ivImportant.setVisibility(View.GONE);
@@ -42,9 +47,11 @@ public class DialogShowNote extends DialogFragment {
         if (!mNote.isIdea()) {
             ivIdea.setVisibility(View.GONE);
         }
+
         Button btnOK = (Button) dialogView.findViewById(R.id.btnOK);
         builder.setView(dialogView).setMessage("Your Note");
         btnOK.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 dismiss();

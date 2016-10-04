@@ -7,6 +7,8 @@ import org.json.JSONObject;
  * Created by andrewott on 9/15/16.
  */
 public class Note {
+
+
     private String mTitle;
     private String mDescription;
     private boolean mIdea;
