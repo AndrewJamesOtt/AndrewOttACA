@@ -2,4 +2,23 @@
     <string name="app_name">TAGD</string>
     <string name="btnSignIn">sign in with xbox live</string>
     <string name="textViewIntro">RATE GAMERS//REK NOOBS</string>
+    <string name="enterGT">Enter Gamertag</string>
+    <string name="enterPW">Enter Password</string>
+    <string name="signIn">Sign In</string>
+    <string name="signInButton">Get Started!</string>
+    <string name="keepSigned">Keep me signed in</string>
+    <string name="signUp">Sign Up</string>
+    <string name="email">Enter E-mail</string>
+    <string name="verification">Enter Verification Code</string>
+    <string name="verify">Get Verified!</string>
+    <string name="commentEx">He was very helpful and knew what he was doing,
+        even helped me find the calcified fragment I was looking for!</string>
+
+    <string name="btnTAGD1">hilarious</string>
+    <string name="btnTAGD2">loud</string>
+    <string name="btnTAGD3">crispy</string>
+    <string name="btnTAGD4">professional</string>
+    <string name="btnTAGD5">skilled</string>
+
+    <string name="testGT">EPICHippoMan</string>
 </resources>
