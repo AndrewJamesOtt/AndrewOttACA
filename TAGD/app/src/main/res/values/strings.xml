@@ -11,8 +11,7 @@
     <string name="email">Enter E-mail</string>
     <string name="verification">Enter Verification Code</string>
     <string name="verify">Get Verified!</string>
-    <string name="commentEx">He was very helpful and knew what he was doing,
-        even helped me find the calcified fragment I was looking for!</string>
+    <string name="reverify">Back to Verification</string>
 
     <string name="btnTAGD1">hilarious</string>
     <string name="btnTAGD2">loud</string>
@@ -21,4 +20,8 @@
     <string name="btnTAGD5">skilled</string>
 
     <string name="testGT">EPICHippoMan</string>
+    <string name="commentEx">He was very helpful and knew what he was doing,
+        even helped me find the calcified fragment I was looking for!</string>
+    <string name="notVerified">I'm sorry, but you could not be verified at this moment.
+        Please check that your information is correct, or try again later! </string>
 </resources>
